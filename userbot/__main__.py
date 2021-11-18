@@ -38,7 +38,7 @@ async def man_client(client):
 # Multi-Client Starter
 def multiman():
     failed = 0
-    if SESSION_2:
+    if STRING_2:
         LOGS.info("SESSION_2 detected! Starting 2nd Client.")
         try:
             MAN2.start()
@@ -47,7 +47,7 @@ def multiman():
             LOGS.info("SESSION_2 failed. Please Check Your String session.")
             failed += 1
 
-    if SESSION_3:
+    if STRING_3:
         LOGS.info("SESSION_3 detected! Starting 3rd Client.")
         try:
             MAN3.start()
@@ -56,7 +56,7 @@ def multiman():
             LOGS.info("SESSION_3 failed. Please Check Your String session.")
             failed += 1
 
-    if SESSION_4:
+    if STRING_4:
         LOGS.info("SESSION_4 detected! Starting 4th Client.")
         try:
             MAN4.start()
@@ -65,7 +65,7 @@ def multiman():
             LOGS.info("SESSION_4 failed. Please Check Your String session.")
             failed += 1
 
-    if SESSION_5:
+    if STRING_5:
         LOGS.info("SESSION_5 detected! Starting 5th Client.")
         try:
             MAN5.start()
@@ -74,13 +74,13 @@ def multiman():
             LOGS.info("SESSION_5 failed. Please Check Your String session.")
             failed += 1
 
-    if not SESSION_2:
+    if not STRING_2:
         failed += 1
-    if not SESSION_3:
+    if not STRING_3:
         failed += 1
-    if not SESSION_4:
+    if not STRING_4:
         failed += 1
-    if not SESSION_5:
+    if not STRING_5:
         failed += 1
     return failed
 
