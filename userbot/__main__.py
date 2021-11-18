@@ -113,7 +113,7 @@ LOGS.info(f"Man-Userbot ⚙️ V{BOT_VER} [🔥 BERHASIL DIAKTIFKAN! 🔥]")
 async def man_userbot_on():
     try:
         if BOTLOG_CHATID != 0:
-            await event.client.send_message(
+            await bot.send_message(
                 BOTLOG_CHATID,
                 f"🔥 **Man-Userbot Berhasil Di Aktifkan**\n━━\n➠ **Userbot Version -** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n➠ **Ketik** `{cmd}alive` **untuk Mengecheck Bot**\n━━",
             )
@@ -128,7 +128,6 @@ async def man_userbot_on():
 
 bot.loop.create_task(checking())
 bot.loop.create_task(man_userbot_on())
-bot.loop.create_task(autobot())
 idle()
 if len(sys.argv) not in (1, 3, 4):
     bot.disconnect()
