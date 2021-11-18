@@ -39,39 +39,39 @@ async def man_client(client):
 def multiman():
     failed = 0
     if STRING_2:
-        LOGS.info("SESSION_2 detected! Starting 2nd Client.")
+        LOGS.info("STRING_2 detected! Starting 2nd Client.")
         try:
             MAN2.start()
             MAN2.loop.run_until_complete(man_client(MAN2))
         except:
-            LOGS.info("SESSION_2 failed. Please Check Your String session.")
+            LOGS.info("STRING_2 failed. Please Check Your String session.")
             failed += 1
 
     if STRING_3:
-        LOGS.info("SESSION_3 detected! Starting 3rd Client.")
+        LOGS.info("STRING_3 detected! Starting 3rd Client.")
         try:
             MAN3.start()
             MAN3.loop.run_until_complete(man_client(MAN3))
         except:
-            LOGS.info("SESSION_3 failed. Please Check Your String session.")
+            LOGS.info("STRING_3 failed. Please Check Your String session.")
             failed += 1
 
     if STRING_4:
-        LOGS.info("SESSION_4 detected! Starting 4th Client.")
+        LOGS.info("STRING_4 detected! Starting 4th Client.")
         try:
             MAN4.start()
             MAN4.loop.run_until_complete(man_client(MAN4))
         except:
-            LOGS.info("SESSION_4 failed. Please Check Your String session.")
+            LOGS.info("STRING_4 failed. Please Check Your String session.")
             failed += 1
 
     if STRING_5:
-        LOGS.info("SESSION_5 detected! Starting 5th Client.")
+        LOGS.info("STRING_5 detected! Starting 5th Client.")
         try:
             MAN5.start()
             MAN5.loop.run_until_complete(man_client(MAN5))
         except:
-            LOGS.info("SESSION_5 failed. Please Check Your String session.")
+            LOGS.info("STRING_5 failed. Please Check Your String session.")
             failed += 1
 
     if not STRING_2:
@@ -113,7 +113,7 @@ LOGS.info(f"Man-Userbot ⚙️ V{BOT_VER} [🔥 BERHASIL DIAKTIFKAN! 🔥]")
 async def man_userbot_on():
     try:
         if BOTLOG_CHATID != 0:
-            await bot.send_message(
+            await event.client.send_message(
                 BOTLOG_CHATID,
                 f"🔥 **Man-Userbot Berhasil Di Aktifkan**\n━━\n➠ **Userbot Version -** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n➠ **Ketik** `{cmd}alive` **untuk Mengecheck Bot**\n━━",
             )
