@@ -114,10 +114,10 @@ API_HASH = str(os.environ.get("API_HASH") or None)
 
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION", None)
-SESSION_2 = os.environ.get("SESSION_2", None)
-SESSION_3 = os.environ.get("SESSION_3", None)
-SESSION_4 = os.environ.get("SESSION_4", None)
-SESSION_5 = os.environ.get("SESSION_5", None)
+STRING_2 = os.environ.get("SESSION_2", None)
+STRING_3 = os.environ.get("SESSION_3", None)
+STRING_4 = os.environ.get("SESSION_4", None)
+STRING_5 = os.environ.get("SESSION_5", None)
 
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID") or 0)
@@ -329,8 +329,8 @@ except Exception as e:
     sys.exit()
 
 
-if SESSION_2:
-    session2 = StringSession(str(SESSION_2))
+if STRING_2:
+    session2 = StringSession(str(STRING_2))
     MAN2 = TelegramClient(
         session=session2,
         api_id=API_KEY,
@@ -343,8 +343,8 @@ else:
     MAN2 = None
 
 
-if SESSION_3:
-    session3 = StringSession(str(SESSION_3))
+if STRING_3:
+    session3 = StringSession(str(STRING_3))
     MAN3 = TelegramClient(
         session=session3,
         api_id=API_KEY,
@@ -357,8 +357,8 @@ else:
     MAN3 = None
 
 
-if SESSION_4:
-    session4 = StringSession(str(SESSION_4))
+if STRING_4:
+    session4 = StringSession(str(STRING_4))
     MAN4 = TelegramClient(
         session=session4,
         api_id=API_KEY,
@@ -371,8 +371,8 @@ else:
     MAN4 = None
 
 
-if SESSION_5:
-    session5 = StringSession(str(SESSION_5))
+if STRING_5:
+    session5 = StringSession(str(STRING_5))
     MAN5 = TelegramClient(
         session=session5,
         api_id=API_KEY,
