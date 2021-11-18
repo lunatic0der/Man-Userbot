@@ -114,6 +114,10 @@ API_HASH = str(os.environ.get("API_HASH") or None)
 
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION", None)
+SESSION_2 = os.environ.get("SESSION_2", None)
+SESSION_3 = os.environ.get("SESSION_3", None)
+SESSION_4 = os.environ.get("SESSION_4", None)
+SESSION_5 = os.environ.get("SESSION_5", None)
 
 # Logging channel/group ID configuration.
 BOTLOG_CHATID = int(os.environ.get("BOTLOG_CHATID") or 0)
@@ -323,6 +327,62 @@ try:
 except Exception as e:
     print(f"STRING_SESSION - {e}")
     sys.exit()
+
+
+if SESSION_2:
+    session2 = StringSession(str(SESSION_2))
+    MAN2 = TelegramClient(
+        session=session2,
+        api_id=Config.APP_ID,
+        api_hash=Config.API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
+    )
+else:
+    MAN2 = None
+
+
+if SESSION_3:
+    session3 = StringSession(str(SESSION_3))
+    MAN3 = TelegramClient(
+        session=session3,
+        api_id=Config.APP_ID,
+        api_hash=Config.API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
+    )
+else:
+    MAN3 = None
+
+
+if SESSION_4:
+    session4 = StringSession(str(SESSION_4))
+    MAN4 = TelegramClient(
+        session=session4,
+        api_id=Config.APP_ID,
+        api_hash=Config.API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
+    )
+else:
+    MAN4 = None
+
+
+if SESSION_5:
+    session5 = StringSession(str(SESSION_5))
+    MAN5 = TelegramClient(
+        session=session5,
+        api_id=Config.APP_ID,
+        api_hash=Config.API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
+    )
+else:
+    MAN5 = None
 
 
 async def check_botlog_chatid():
