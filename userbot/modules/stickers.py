@@ -31,8 +31,7 @@ from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
 from userbot import S_PACK_NAME as custompack
 from userbot import bot
-from userbot.events import man_cmd
-from userbot.utils import edit_or_reply
+from userbot.utils import edit_or_reply, man_cmd
 
 KANGING_STR = [
     "Colong Sticker dulu yee kan",
@@ -43,7 +42,7 @@ KANGING_STR = [
 ]
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"(?:tikel|kang)\s?(.)?"))
+@man_cmd(pattern="(?:tikel|kang)\s?(.)?")
 async def kang(args):
     user = await bot.get_me()
     if not user.username:
@@ -285,7 +284,7 @@ async def resize_photo(photo):
     return image
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"stickerinfo$"))
+@man_cmd(pattern="stickerinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
         return await event.edit("**Mohon Balas Ke Sticker**")
@@ -327,7 +326,7 @@ async def get_pack_info(event):
     await event.edit(OUTPUT)
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"delsticker ?(.*)"))
+@man_cmd(pattern="delsticker ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -371,7 +370,7 @@ async def _(event):
             await event.edit("**Berhasil Menghapus Stiker.**")
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"editsticker ?(.*)"))
+@man_cmd(pattern="editsticker ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -418,7 +417,7 @@ async def _(event):
                 )
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"getsticker$"))
+@man_cmd(pattern="getsticker$")
 async def sticker_to_png(sticker):
     if not sticker.is_reply:
         await sticker.edit("**Harap balas ke stiker**")
@@ -438,7 +437,7 @@ async def sticker_to_png(sticker):
     await sticker.delete()
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"stickers ?([\s\S]*)"))
+@man_cmd(pattern="stickers ?([\s\S]*)")
 async def cb_sticker(event):
     query = event.pattern_match.group(1)
     if not query:
@@ -458,7 +457,7 @@ async def cb_sticker(event):
     await event.edit(reply)
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"itos$"))
+@man_cmd(pattern="itos$")
 async def _(event):
     if event.fwd_from:
         return
@@ -492,7 +491,7 @@ async def _(event):
             await event.client.delete_message(event.chat_id, [msg.id, response.id])
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"get$"))
+@man_cmd(pattern="get$")
 async def _(event):
     rep_msg = await event.get_reply_message()
     if not event.is_reply or not rep_msg.sticker:
