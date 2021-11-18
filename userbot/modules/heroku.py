@@ -14,9 +14,8 @@ import urllib3
 from userbot import BOTLOG, BOTLOG_CHATID
 from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME, bot
-from userbot.events import man_cmd
 from userbot.modules.sql_helper.globals import addgvar, delgvar, gvarstatus
-from userbot.utils import edit_or_reply
+from userbot.utils import edit_or_reply, man_cmd
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 heroku_api = "https://api.heroku.com"
@@ -33,7 +32,7 @@ else:
 """
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"(get|del) var(?: |$)(\w*)"))
+@man_cmd(pattern=r"(get|del) var(?: |$)(\w*)")
 async def variable(var):
     exe = var.pattern_match.group(1)
     if app is None:
@@ -90,7 +89,7 @@ async def variable(var):
             return True
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"set var (\w*) ([\s\S]*)"))
+@man_cmd(pattern="set var (\w*) ([\s\S]*)")
 async def set_var(var):
     if app is None:
         return await var.edit(
@@ -125,7 +124,7 @@ async def set_var(var):
 """
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"(usage|kuota)(?: |$)"))
+@man_cmd(pattern="(usage|kuota)(?: |$)")
 async def dyno_usage(dyno):
     if app is None:
         return await dyno.edit(
@@ -195,7 +194,7 @@ async def dyno_usage(dyno):
         return True
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"usange(?: |$)"))
+@man_cmd(pattern="usange(?: |$)")
 async def fake_dyno(event):
     await event.edit("`Processing...`")
     await event.edit(
@@ -212,7 +211,7 @@ async def fake_dyno(event):
     )
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"logs"))
+@man_cmd(pattern="logs")
 async def _(dyno):
     if app is None:
         return await edit_or_reply(
@@ -223,7 +222,7 @@ async def _(dyno):
     await edit_or_reply(xx, data, deflink=True, linktext="**✣ Ini Logs Heroku Anda :**")
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"getdb ?(.*)"))
+@man_cmd(pattern="getdb ?(.*)")
 async def getsql(event):
     var_ = event.pattern_match.group(1).upper()
     xxnx = await edit_or_reply(event, f"**Getting variable** `{var_}`")
@@ -241,7 +240,7 @@ async def getsql(event):
     )
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"setdb ?(.*)"))
+@man_cmd(pattern="setdb ?(.*)")
 async def setsql(event):
     hel_ = event.pattern_match.group(1)
     var_ = hel_.split(" ")[0].upper()
@@ -259,7 +258,7 @@ async def setsql(event):
     await xxnx.edit(f"**Variable** `{var_}` **successfully added with value** `{valu}`")
 
 
-@bot.on(man_cmd(outgoing=True, pattern=r"deldb ?(.*)"))
+@man_cmd(pattern="deldb ?(.*)")
 async def delsql(event):
     var_ = event.pattern_match.group(1).upper()
     xxnx = await edit_or_reply(event, f"**Deleting Variable** `{var_}`")
