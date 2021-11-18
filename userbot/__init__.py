@@ -333,8 +333,8 @@ if SESSION_2:
     session2 = StringSession(str(SESSION_2))
     MAN2 = TelegramClient(
         session=session2,
-        api_id=Config.APP_ID,
-        api_hash=Config.API_HASH,
+        api_id=API_KEY,
+        api_hash=API_HASH,
         connection=ConnectionTcpAbridged,
         auto_reconnect=True,
         connection_retries=None,
@@ -347,8 +347,8 @@ if SESSION_3:
     session3 = StringSession(str(SESSION_3))
     MAN3 = TelegramClient(
         session=session3,
-        api_id=Config.APP_ID,
-        api_hash=Config.API_HASH,
+        api_id=API_KEY,
+        api_hash=API_HASH,
         connection=ConnectionTcpAbridged,
         auto_reconnect=True,
         connection_retries=None,
@@ -361,8 +361,8 @@ if SESSION_4:
     session4 = StringSession(str(SESSION_4))
     MAN4 = TelegramClient(
         session=session4,
-        api_id=Config.APP_ID,
-        api_hash=Config.API_HASH,
+        api_id=API_KEY,
+        api_hash=API_HASH,
         connection=ConnectionTcpAbridged,
         auto_reconnect=True,
         connection_retries=None,
@@ -375,8 +375,8 @@ if SESSION_5:
     session5 = StringSession(str(SESSION_5))
     MAN5 = TelegramClient(
         session=session5,
-        api_id=Config.APP_ID,
-        api_hash=Config.API_HASH,
+        api_id=API_KEY,
+        api_hash=API_HASH,
         connection=ConnectionTcpAbridged,
         auto_reconnect=True,
         connection_retries=None,
