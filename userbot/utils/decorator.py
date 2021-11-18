@@ -14,6 +14,10 @@ from userbot import (
     CMD_HANDLER,
     CMD_LIST,
     LOAD_PLUG,
+    MAN2,
+    MAN3,
+    MAN4,
+    MAN5,
     SUDO_HANDLER,
     SUDO_USERS,
     bot,
@@ -96,6 +100,22 @@ def man_cmd(
                     **args, from_users=list(SUDO_USERS), pattern=sudo_reg
                 ),
             )
+        if MAN2:
+            if not disable_edited:
+                MAN2.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
+            MAN2.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+        if MAN3:
+            if not disable_edited:
+                MAN3.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
+            MAN3.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+        if MAN4:
+            if not disable_edited:
+                MAN4.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
+            MAN4.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+        if MAN5:
+            if not disable_edited:
+                MAN5.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
+            MAN5.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
         try:
             LOAD_PLUG[file_test].append(func)
         except Exception:
@@ -110,6 +130,14 @@ def man_handler(
 ):
     def decorator(func):
         bot.add_event_handler(func, events.NewMessage(**args, incoming=True))
+        if MAN2:
+            MAN2.add_event_handler(func, events.NewMessage(**args, incoming=True))
+        if MAN3:
+            MAN3.add_event_handler(func, events.NewMessage(**args, incoming=True))
+        if MAN4:
+            MAN4.add_event_handler(func, events.NewMessage(**args, incoming=True))
+        if MAN5:
+            MAN5.add_event_handler(func, events.NewMessage(**args, incoming=True))
         return func
 
     return decorator
