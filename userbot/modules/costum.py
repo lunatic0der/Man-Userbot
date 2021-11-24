@@ -7,7 +7,7 @@
 # FROM Man-Userbot
 # t.me/SharingUserbot
 #
-""" Userbot module containing commands for keeping costum global notes. """
+""" Userbot module containing commands for keeping custom global notes. """
 
 
 from userbot import BOTLOG_CHATID
@@ -66,7 +66,7 @@ async def add_snip(event):
             )
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
+            f"📝 **#CUSTOM_CMD**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk custom, Tolong JANGAN Dihapus!!",
         )
         cht_o = await event.client.forward_messages(
             entity=BOTLOG_CHATID, messages=cht, from_peer=event.chat_id, silent=True
@@ -80,12 +80,12 @@ async def add_snip(event):
             )
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
+            f"📝 **#CUSTOM_CMD**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk custom, Tolong JANGAN Dihapus!!",
         )
         cht_o = await event.client.send_message(BOTLOG_CHATID, stri)
         cht_id = cht_o.id
         stri = None
-    success = "**Costum {}. Gunakan** `#{}` **di mana saja untuk menggunakannya**"
+    success = "**custom {}. Gunakan** `#{}` **di mana saja untuk menggunakannya**"
     if sql.add_note(trigger, stri, cht_id) is False:
         sql.rm_note(trigger)
         if sql.add_note(trigger, stri, cht_id) is False:
@@ -104,7 +104,7 @@ async def _(event):
     try:
         sql.rm_note(input_str)
         await edit_or_reply(
-            event, "**Berhasil menghapus costum:** `#{}`".format(input_str)
+            event, "**Berhasil menghapus custom:** `#{}`".format(input_str)
         )
     except BaseException:
         await edit_or_reply(event, "Tidak ada snip yang disimpan dengan pemicu ini.")
@@ -113,7 +113,7 @@ async def _(event):
 @man_cmd(pattern="customs$")
 async def lsnote(event):
     all_snips = sql.get_notes()
-    OUT_STR = "**List Costum yang tersedia:**\n"
+    OUT_STR = "**List Custom yang tersedia:**\n"
     if len(all_snips) > 0:
         for a_snip in all_snips:
             OUT_STR += f"✣ `#{a_snip.keyword}` \n"
@@ -127,7 +127,7 @@ async def lsnote(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                caption="**List Costum yang tersedia**",
+                caption="**List Custom yang tersedia**",
                 reply_to=event,
             )
             await event.delete()
@@ -139,11 +139,11 @@ CMD_HELP.update(
     {
         "custom": f"**Plugin : **`custom`\
         \n\n  •  **Syntax :** `{cmd}custom` <nama> <data> atau membalas pesan dengan .custom <nama>\
-        \n  •  **Function : **Menyimpan pesan costum (catatan global) dengan nama. (bisa dengan gambar, docs, dan stickers!)\
+        \n  •  **Function : **Menyimpan pesan custom (catatan global) dengan nama. (bisa dengan gambar, docs, dan stickers!)\
         \n\n  •  **Syntax :** `{cmd}customs`\
-        \n  •  **Function : **Mendapat semua costums yang disimpan.\
+        \n  •  **Function : **Mendapat semua customs yang disimpan.\
         \n\n  •  **Syntax :** `{cmd}delcustom` <nama_custom>\
-        \n  •  **Function : **Menghapus costum yang ditentukan.\
+        \n  •  **Function : **Menghapus custom yang ditentukan.\
     "
     }
 )
