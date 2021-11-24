@@ -51,7 +51,7 @@ async def incom_note(event):
         pass
 
 
-@man_cmd(pattern="snip(?:\\s|$)([\\s\\S]*)")
+@man_cmd(pattern="custom(?:\\s|$)([\\s\\S]*)")
 async def add_snip(event):
     trigger = event.pattern_match.group(1)
     stri = event.text.partition(trigger)[2]
@@ -95,7 +95,7 @@ async def add_snip(event):
     return await edit_or_reply(event, success.format("Berhasil disimpan", trigger))
 
 
-@man_cmd(pattern="delsnip(?:\\s|$)([\\s\\S]*)")
+@man_cmd(pattern="delcustom(?:\\s|$)([\\s\\S]*)")
 async def _(event):
     input_str = (event.pattern_match.group(1)).lower()
     if not input_str:
@@ -111,7 +111,7 @@ async def _(event):
         await edit_or_reply(event, "Tidak ada snip yang disimpan dengan pemicu ini.")
 
 
-@man_cmd(pattern="listsnip$")
+@man_cmd(pattern="customs$")
 async def lsnote(event):
     all_snips = sql.get_notes()
     OUT_STR = "**List Costum yang tersedia:**\n"
