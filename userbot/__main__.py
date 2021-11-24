@@ -14,14 +14,26 @@ import sys
 from importlib import import_module
 
 from pytgcalls import idle
-from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 from telethon.tl.functions.channels import JoinChannelRequest
 
 from userbot import ALIVE_NAME, BOT_VER, BOTLOG_CHATID
 from userbot import CMD_HANDLER as cmd
-from userbot import BOT_TOKEN, BOT_USERNAME, LOGS, MAN2, MAN3, MAN4, MAN5, STRING_2, STRING_3, STRING_4, STRING_5, UPSTREAM_REPO_BRANCH, bot, call_py
+from userbot import (
+    LOGS,
+    MAN2,
+    MAN3,
+    MAN4,
+    MAN5,
+    STRING_2,
+    STRING_3,
+    STRING_4,
+    STRING_5,
+    UPSTREAM_REPO_BRANCH,
+    bot,
+    call_py,
+)
 from userbot.modules import ALL_MODULES
-from userbot.utils import autobot, checking
+from userbot.utils import checking
 
 INVALID_PH = (
     "\nERROR: Nomor Telepon yang kamu masukkan SALAH."
@@ -89,12 +101,12 @@ if len(sys.argv) not in (1, 3, 4):
     bot.disconnect()
 else:
     try:
-       bot.start()
-       call_py.start()
-       failed_client = multiman()
-       global total
-       total = 5 - failed_client
-       LOGS.info(f"» Total Clients = {total} «")
+        bot.start()
+        call_py.start()
+        failed_client = multiman()
+        global total
+        total = 5 - failed_client
+        LOGS.info(f"» Total Clients = {total} «")
     except Exception as e:
         LOGS.error(f"{str(e)}")
         sys.exit()

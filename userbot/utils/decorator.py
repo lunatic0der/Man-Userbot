@@ -102,20 +102,36 @@ def man_cmd(
             )
         if MAN2:
             if not disable_edited:
-                MAN2.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
-            MAN2.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+                MAN2.add_event_handler(
+                    func, events.MessageEdited(**args, outgoing=True, pattern=man_reg)
+                )
+            MAN2.add_event_handler(
+                func, events.NewMessage(**args, outgoing=True, pattern=man_reg)
+            )
         if MAN3:
             if not disable_edited:
-                MAN3.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
-            MAN3.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+                MAN3.add_event_handler(
+                    func, events.MessageEdited(**args, outgoing=True, pattern=man_reg)
+                )
+            MAN3.add_event_handler(
+                func, events.NewMessage(**args, outgoing=True, pattern=man_reg)
+            )
         if MAN4:
             if not disable_edited:
-                MAN4.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
-            MAN4.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+                MAN4.add_event_handler(
+                    func, events.MessageEdited(**args, outgoing=True, pattern=man_reg)
+                )
+            MAN4.add_event_handler(
+                func, events.NewMessage(**args, outgoing=True, pattern=man_reg)
+            )
         if MAN5:
             if not disable_edited:
-                MAN5.add_event_handler(func, events.MessageEdited(**args, outgoing=True, pattern=man_reg))
-            MAN5.add_event_handler(func, events.NewMessage(**args, outgoing=True, pattern=man_reg))
+                MAN5.add_event_handler(
+                    func, events.MessageEdited(**args, outgoing=True, pattern=man_reg)
+                )
+            MAN5.add_event_handler(
+                func, events.NewMessage(**args, outgoing=True, pattern=man_reg)
+            )
         try:
             LOAD_PLUG[file_test].append(func)
         except Exception:
