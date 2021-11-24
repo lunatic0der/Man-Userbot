@@ -3,6 +3,7 @@
 # t.me/SharingUserbot & t.me/Lunatic0de
 
 import asyncio
+import heroku3
 import importlib
 import logging
 import sys
@@ -12,15 +13,22 @@ from random import randint
 from telethon.tl.functions.channels import InviteToChannelRequest
 from telethon.tl.functions.contacts import UnblockRequest
 
-from userbot import BOT_TOKEN, BOTLOG_CHATID, CMD_HELP, LOGS, bot
+from userbot import BOT_TOKEN, BOTLOG_CHATID, CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME, LOGS, bot
 from userbot.modules.sql_helper.globals import addgvar, gvarstatus
 
 
+heroku_api = "https://api.heroku.com"
+if HEROKU_APP_NAME is not None and HEROKU_API_KEY is not None:
+    Heroku = heroku3.from_key(HEROKU_API_KEY)
+    app = Heroku.app(HEROKU_APP_NAME)
+    heroku_var = app.config()
+else:
+    app = None
+
+
 async def autobot():
-    if gvarstatus("BOT_TOKEN"):
-        return
     if BOT_TOKEN:
-        return addgvar("BOT_TOKEN", BOT_TOKEN)
+        return
     await bot.start()
     await bot.send_message(
         BOTLOG_CHATID, "**SEDANG MEMBUAT BOT TELEGRAM UNTUK ANDA DI @BotFather**"
@@ -69,8 +77,6 @@ async def autobot():
         nowdone = (await bot.get_messages(bf, limit=1))[0].text
         if nowdone.startswith("Done!"):
             token = nowdone.split("`")[1]
-            addgvar("BOT_TOKEN", f"{token}")
-            addgvar("BOT_USERNAME", f"@{username}")
             await bot.send_message(bf, "/setinline")
             await asyncio.sleep(1)
             await bot.send_message(bf, f"@{username}")
@@ -101,6 +107,8 @@ async def autobot():
                 BOTLOG_CHATID,
                 f"**BERHASIL MEMBUAT BOT TELEGRAM DENGAN USERNAME @{username}**",
             )
+            heroku_var["BOT_TOKEN"] = token
+            heroku_var["BOT_USERNAME"] = username
         else:
             LOGS.info(
                 "Silakan Hapus Beberapa Bot Telegram Anda di @Botfather atau Set Var BOT_TOKEN dengan token bot"
@@ -108,8 +116,6 @@ async def autobot():
             sys.exit(1)
     elif isdone.startswith("Done!"):
         token = isdone.split("`")[1]
-        addgvar("BOT_TOKEN", f"{token}")
-        addgvar("BOT_USERNAME", f"@{username}")
         await bot.send_message(bf, "/setinline")
         await asyncio.sleep(1)
         await bot.send_message(bf, f"@{username}")
@@ -140,6 +146,8 @@ async def autobot():
             BOTLOG_CHATID,
             f"**BERHASIL MEMBUAT BOT TELEGRAM DENGAN USERNAME @{username}**",
         )
+        heroku_var["BOT_TOKEN"] = token
+        heroku_var["BOT_USERNAME"] = username
     else:
         LOGS.info(
             "Silakan Hapus Beberapa Bot Telegram Anda di @Botfather atau Set Var BOT_TOKEN dengan token bot"
