@@ -17,7 +17,7 @@ from userbot.modules.sql_helper import snips_sql as sql
 from userbot.utils import edit_delete, edit_or_reply, man_cmd, reply_id
 
 
-@man_cmd(pattern=r"\.(\S+)")
+@man_cmd(pattern=r"\#(\S+)")
 async def incom_note(event):
     if not BOTLOG_CHATID:
         return
@@ -61,7 +61,7 @@ async def add_snip(event):
     if cht and not stri:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"📝 **#COSTUM**\n • **KEYWORD:** `.{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
+            f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
         )
         cht_o = await event.client.forward_messages(
             entity=BOTLOG_CHATID, messages=cht, from_peer=event.chat_id, silent=True
@@ -76,7 +76,7 @@ async def add_snip(event):
         if stri:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"📝 **#COSTUM**\n • **KEYWORD:** `.{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
+                f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
             )
             cht_o = await event.client.send_message(BOTLOG_CHATID, stri)
             cht_id = cht_o.id
@@ -86,7 +86,7 @@ async def add_snip(event):
                 event,
                 f"**Perintah tidak diketahui! ketik** `{cmd}help custom` **bila butuh bantuan.**",
             )
-    success = "**Costum {}. Gunakan** `.{}` **di mana saja untuk menggunakannya**"
+    success = "**Costum {}. Gunakan** `#{}` **di mana saja untuk menggunakannya**"
     if sql.add_note(trigger, stri, cht_id) is False:
         sql.rm_note(trigger)
         if sql.add_note(trigger, stri, cht_id) is False:
@@ -100,12 +100,12 @@ async def _(event):
     input_str = (event.pattern_match.group(1)).lower()
     if not input_str:
         return await edit_delete(e, "**Berikan nama custom untuk dihapus**")
-    if input_str.startswith("."):
-        input_str = input_str.replace(".", "")
+    if input_str.startswith("#"):
+        input_str = input_str.replace("#", "")
     try:
         sql.rm_note(input_str)
         await edit_or_reply(
-            event, "**Berhasil menghapus costum:** `.{}`".format(input_str)
+            event, "**Berhasil menghapus costum:** `#{}`".format(input_str)
         )
     except BaseException:
         await edit_or_reply(event, "Tidak ada snip yang disimpan dengan pemicu ini.")
@@ -113,16 +113,16 @@ async def _(event):
 
 @man_cmd(pattern="listsnip$")
 async def lsnote(event):
-    all_custom = sql.get_notes()
+    all_snips = sql.get_notes()
     OUT_STR = "**List Costum yang tersedia:**\n"
-    if len(all_custom) > 0:
-        for a_snip in all_custom:
-            OUT_STR += f"✣ `.{a_snip.keyword}` \n"
+    if len(all_snips) > 0:
+        for a_snip in all_snips:
+            OUT_STR += f"✣ `#{a_snip.keyword}` \n"
     else:
         OUT_STR = f"**Tidak ada custom cmd yang disimpan.**"
     if len(OUT_STR) > 4000:
         with io.BytesIO(str.encode(OUT_STR)) as out_file:
-            out_file.name = "customs.text"
+            out_file.name = "snips.text"
             await event.client.send_file(
                 event.chat_id,
                 out_file,
