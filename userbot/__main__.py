@@ -108,7 +108,7 @@ else:
         total = 5 - failed_client
         LOGS.info(f"» Total Clients = {total} «")
     except Exception as e:
-        LOGS.error(f"{str(e)}")
+        LOGS.error(f'{e}')
         sys.exit()
 
 

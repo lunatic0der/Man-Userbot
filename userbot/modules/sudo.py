@@ -39,11 +39,10 @@ async def add(event):
             "Balas ke pengguna atau berikan user id untuk menambahkannya ke daftar pengguna sudo anda.",
             45,
         )
-    if suu:
-        if not suu.isnumeric():
-            return await edit_delete(
-                xxnx, "Berikan User ID atau reply ke pesan penggunanya.", 45
-            )
+    if suu and not suu.isnumeric():
+        return await edit_delete(
+            xxnx, "Berikan User ID atau reply ke pesan penggunanya.", 45
+        )
     if HEROKU_APP_NAME is not None:
         app = Heroku.app(HEROKU_APP_NAME)
     else:
@@ -79,11 +78,10 @@ async def _(event):
             "Balas ke pengguna atau berikan user id untuk menghapusnya dari daftar pengguna sudo Anda.",
             45,
         )
-    if suu:
-        if not suu.isnumeric():
-            return await edit_delete(
-                xxnx, "Berikan User ID atau reply ke pesan penggunanya.", 45
-            )
+    if suu and not suu.isnumeric():
+        return await edit_delete(
+            xxnx, "Berikan User ID atau reply ke pesan penggunanya.", 45
+        )
     if HEROKU_APP_NAME is not None:
         app = Heroku.app(HEROKU_APP_NAME)
     else:
