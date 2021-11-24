@@ -13,7 +13,7 @@
 from userbot import BOTLOG_CHATID
 from userbot import CMD_HANDLER as cmd
 from userbot import CMD_HELP
-from userbot.modules.sql_helper import snips_sql as sq
+from userbot.modules.sql_helper import snips_sql as sql
 from userbot.utils import edit_delete, edit_or_reply, man_cmd, reply_id
 
 
@@ -25,7 +25,7 @@ async def incom_note(event):
         if not (await event.get_sender()).bot:
             notename = event.text[1:]
             notename = notename.lower()
-            note = sq.get_note(notename)
+            note = sql.get_note(notename)
             message_id_to_reply = await reply_id(event)
             if note:
                 if note.f_mesg_id:
@@ -87,9 +87,9 @@ async def add_snip(event):
                 f"**Perintah tidak diketahui! ketik** `{cmd}help custom` **bila butuh bantuan.**",
             )
     success = "**Costum {}. Gunakan** `#{}` **di mana saja untuk menggunakannya**"
-    if sq.add_note(trigger, stri, cht_id) is False:
-        sq.rm_note(trigger)
-        if sq.add_note(trigger, stri, cht_id) is False:
+    if sql.add_note(trigger, stri, cht_id) is False:
+        sql.rm_note(trigger)
+        if sql.add_note(trigger, stri, cht_id) is False:
             return await edit_or_reply(event, f"**Gagal Menambahkan Custom CMD**")
         return await edit_or_reply(event, success.format("Berhasil di Update", trigger))
     return await edit_or_reply(event, success.format("Berhasil disimpan", trigger))
@@ -103,7 +103,7 @@ async def _(event):
     if input_str.startswith("#"):
         input_str = input_str.replace("#", "")
     try:
-        sq.rm_note(input_str)
+        sql.rm_note(input_str)
         await edit_or_reply(
             event, "**Berhasil menghapus costum:** `#{}`".format(input_str)
         )
@@ -113,7 +113,7 @@ async def _(event):
 
 @man_cmd(pattern="listsnip$")
 async def lsnote(event):
-    all_snips = sq.get_notes()
+    all_snips = sql.get_notes()
     OUT_STR = "**List Costum yang tersedia:**\n"
     if len(all_snips) > 0:
         for a_snip in all_snips:
