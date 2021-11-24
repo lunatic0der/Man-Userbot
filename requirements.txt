@@ -61,14 +61,12 @@ pySmartDL
 python-barcode
 python-dateutil
 python-dotenv
-pytube>=9.5.1
 pytz
 qrcode
 rarfile
 randomstuff.py
 regex
 requests
-scipy
 search-engine-parser
 selenium
 setuptools
@@ -86,7 +84,6 @@ vcsi
 wand
 wget
 wikipedia
-wordcloud
 youtube-dl
 youtube-search
 youtube-search-python==1.4.9
