@@ -448,6 +448,19 @@ except AttributeError:
     pass
 
 
+if not BOT_TOKEN is None:
+    tgbot = TelegramClient(
+        "TG_BOT_TOKEN",
+        api_id=API_KEY,
+        api_hash=API_HASH,
+        connection=ConnectionTcpAbridged,
+        auto_reconnect=True,
+        connection_retries=None,
+    ).start(bot_token=BOT_TOKEN)
+else:
+    tgbot = None
+
+
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = 5
     number_of_cols = 4
@@ -493,15 +506,6 @@ def paginate_help(page_number, loaded_modules, prefix):
 with bot:
     try:
         from userbot.modules.sql_helper.globals import gvarstatus
-
-        tgbot = TelegramClient(
-            "TG_BOT_TOKEN",
-            api_id=API_KEY,
-            api_hash=API_HASH,
-            connection=ConnectionTcpAbridged,
-            auto_reconnect=True,
-            connection_retries=None,
-        ).start(bot_token=BOT_TOKEN or gvarstatus("BOT_TOKEN"))
 
         dugmeler = CMD_HELP
         user = bot.get_me()
