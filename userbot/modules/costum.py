@@ -58,7 +58,12 @@ async def add_snip(event):
     cht = await event.get_reply_message()
     cht_id = None
     trigger = trigger.lower()
-    if cht and not stri:
+    if cht:
+        if stri:
+            return await edit_delete(
+                event,
+                f"**Balas pesan dengan** `{cmd}custom <trigger>` **untuk menambahkan ke custom cmd**",
+            )
         await event.client.send_message(
             BOTLOG_CHATID,
             f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
@@ -67,30 +72,24 @@ async def add_snip(event):
             entity=BOTLOG_CHATID, messages=cht, from_peer=event.chat_id, silent=True
         )
         cht_id = cht_o.id
-    elif cht:
-        return await edit_delete(
-            event,
-            f"**Balas pesan dengan** `{cmd}custom <trigger>` **untuk menambahkan ke custom cmd**",
-        )
     if not cht:
-        if stri:
-            await event.client.send_message(
-                BOTLOG_CHATID,
-                f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
-            )
-            cht_o = await event.client.send_message(BOTLOG_CHATID, stri)
-            cht_id = cht_o.id
-            stri = None
-        else:
+        if not stri:
             return await edit_delete(
                 event,
                 f"**Perintah tidak diketahui! ketik** `{cmd}help custom` **bila butuh bantuan.**",
             )
+        await event.client.send_message(
+            BOTLOG_CHATID,
+            f"📝 **#COSTUM**\n • **KEYWORD:** `#{trigger}`\n • 🔖 Pesan ini disimpan sebagai catatan data untuk costum, Tolong JANGAN Dihapus!!",
+        )
+        cht_o = await event.client.send_message(BOTLOG_CHATID, stri)
+        cht_id = cht_o.id
+        stri = None
     success = "**Costum {}. Gunakan** `#{}` **di mana saja untuk menggunakannya**"
     if sql.add_note(trigger, stri, cht_id) is False:
         sql.rm_note(trigger)
         if sql.add_note(trigger, stri, cht_id) is False:
-            return await edit_or_reply(event, f"**Gagal Menambahkan Custom CMD**")
+            return await edit_or_reply(event, '**Gagal Menambahkan Custom CMD**')
         return await edit_or_reply(event, success.format("Berhasil di Update", trigger))
     return await edit_or_reply(event, success.format("Berhasil disimpan", trigger))
 
@@ -119,7 +118,7 @@ async def lsnote(event):
         for a_snip in all_snips:
             OUT_STR += f"✣ `#{a_snip.keyword}` \n"
     else:
-        OUT_STR = f"**Tidak ada custom cmd yang disimpan.**"
+        OUT_STR = '**Tidak ada custom cmd yang disimpan.**'
     if len(OUT_STR) > 4000:
         with io.BytesIO(str.encode(OUT_STR)) as out_file:
             out_file.name = "snips.text"
