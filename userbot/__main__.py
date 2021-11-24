@@ -33,7 +33,7 @@ from userbot import (
     call_py,
 )
 from userbot.modules import ALL_MODULES
-from userbot.utils import checking
+from userbot.utils import autobot, checking
 
 INVALID_PH = (
     "\nERROR: Nomor Telepon yang kamu masukkan SALAH."
@@ -138,6 +138,7 @@ async def man_userbot_on():
         pass
 
 
+bot.loop.create_task(autobot())
 bot.loop.create_task(checking())
 bot.loop.create_task(man_userbot_on())
 idle()
