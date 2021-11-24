@@ -108,7 +108,7 @@ async def autobot():
                 f"**BERHASIL MEMBUAT BOT TELEGRAM DENGAN USERNAME @{username}**",
             )
             heroku_var["BOT_TOKEN"] = token
-            heroku_var["BOT_USERNAME"] = username
+            heroku_var["BOT_USERNAME"] = f"@{username}"
         else:
             LOGS.info(
                 "Silakan Hapus Beberapa Bot Telegram Anda di @Botfather atau Set Var BOT_TOKEN dengan token bot"
@@ -147,7 +147,7 @@ async def autobot():
             f"**BERHASIL MEMBUAT BOT TELEGRAM DENGAN USERNAME @{username}**",
         )
         heroku_var["BOT_TOKEN"] = token
-        heroku_var["BOT_USERNAME"] = username
+        heroku_var["BOT_USERNAME"] = f"@{username}"
     else:
         LOGS.info(
             "Silakan Hapus Beberapa Bot Telegram Anda di @Botfather atau Set Var BOT_TOKEN dengan token bot"
