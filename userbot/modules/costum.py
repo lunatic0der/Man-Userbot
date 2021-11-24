@@ -14,7 +14,7 @@ from telethon import events
 from userbot.modules.sql_helper import snips_sql as sq
 from userbot import CMD_HANDLER as cmd
 from userbot import BOTLOG_CHATID, CMD_HELP
-from userbot.utils import edit_delete, edit_or_reply, man_cmd
+from userbot.utils import edit_delete, edit_or_reply, man_cmd, reply_id
 
 
 @man_cmd(pattern=r'\#(\S+)')
