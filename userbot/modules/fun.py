@@ -17,11 +17,10 @@ from userbot.utils import bash, progress
 
 @bot.on(man_cmd(outgoing=True, pattern=r"honka(?: |$)(.*)"))
 async def frg(animu):
-    text = animu.pattern_match.group(1)
-    if not text:
-        await animumedit("**Silahkan Masukan Kata!**")
-    else:
+    if text := animu.pattern_match.group(1):
         sticcers = await bot.inline_query("honka_says_bot", f"{text}.")
+    else:
+        await animumedit("**Silahkan Masukan Kata!**")
     try:
         await sticcers[0].click(
             animu.chat_id,
